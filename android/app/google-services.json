@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "358622170028",
+    "project_id": "eatimer-e85c5",
+    "storage_bucket": "eatimer-e85c5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:358622170028:android:903d61b38e441c4155c809",
+        "android_client_info": {
+          "package_name": "com.example.fasting_diary"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "358622170028-0vg2r7lk3h54jpq0rtg96apddcihbqmi.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDugZNvE8T7qC-JI5YWtJKRC2JTToJ7P4A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "358622170028-0vg2r7lk3h54jpq0rtg96apddcihbqmi.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

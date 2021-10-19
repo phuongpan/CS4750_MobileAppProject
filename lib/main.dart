@@ -1,6 +1,10 @@
+import 'package:fasting_diary/sign_up_page.dart';
 import 'package:flutter/material.dart';
-
+import 'package:fasting_diary/sign_in_page.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:animated_text_kit/animated_text_kit.dart';
 void main() {
+
   runApp(MyApp());
 }
 
@@ -11,16 +15,13 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
-        primarySwatch: Colors.blue,
+       // backgroundColor: Color(0xFFFEE5B4),
+          canvasColor: Color(0xffFEE5B4),
+          iconTheme: IconThemeData(
+            color: Colors.black,
+          ),
+          brightness: Brightness.dark,
+          accentColor: Color(0xffFFBA52)
       ),
       home: MyHomePage(title: 'Flutter Demo Home Page'),
     );
@@ -45,69 +46,127 @@ class MyHomePage extends StatefulWidget {
   _MyHomePageState createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateMixin {
+    late AnimationController controller;
+    late Animation animation;
 
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
-  }
+    @override
+    void initState(){
+      super.initState();
+      controller = AnimationController(
+          duration: Duration(seconds: 10),
+          vsync: this
+      );
+      // animation = CurvedAnimation(parent: controller, curve: Curves.decelerate);
+      animation = ColorTween(begin:Colors.red, end:Colors.blue).animate(controller);
+      controller.forward();
 
-  @override
-  Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
+      // animation.addStatusListener((status) {
+      //   if(status == AnimationStatus.completed)
+      //     {
+      //       controller.reverse(from: 1.0);
+      //     }else if(status == AnimationStatus.dismissed)
+      //       {
+      //         controller.forward();
+      //       }
+      // });
+
+      controller.addListener(() {
+        setState(() {
+        });
+
+      });
+    }
+
+    @override
+    void dispose(){
+      controller.dispose();
+      super.dispose();
+    }
+
+    @override
+    Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
-      ),
+      backgroundColor: Color(0xffFEE5B4),
+
+      // appBar: AppBar(
+      //   // Here we take the value from the MyHomePage object that was created by
+      //   // the App.build method, and use it to set our appbar title.
+      //   title: Text(widget.title),
+      // ),
       body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
         child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Invoke "debug painting" (press "p" in the console, choose the
-          // "Toggle Debug Paint" action from the Flutter Inspector in Android
-          // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-          // to see the wireframe for each widget.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
+          children:[
+            SizedBox(height: 50,),
+           Padding(
+                padding: const EdgeInsets.only(bottom: 180),
+                child: Column(
+                  children: [
+                    Hero(
+                      tag: 'logo',
+                      child: Image(
+                          image: AssetImage('pictures/SignIn.PNG'),
+                          fit: BoxFit.cover,
+                        height: 300,
+                        ),
+                    ),
+                   SizedBox(height: 25,),
+                   DefaultTextStyle(
+                        style: GoogleFonts.leckerliOne(fontSize:60, color: Color(0xFF787373)),
+                        child: AnimatedTextKit(
+                          animatedTexts: [
+                            TyperAnimatedText('Eatimer'),
+                          ],
+                          isRepeatingAnimation: true,
+                        ),
+                      ),
+
+                    //Text("Eatimer", style: GoogleFonts.leckerliOne(fontSize:60, color: Color(0xFF787373)),)
+                  ],
+                ),
+              ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Material(
+                elevation: 5.0,
+                color: Color(0xFFFFBA52),
+                borderRadius: BorderRadius.circular(30.0),
+                child: MaterialButton(
+                  minWidth: 300.0,
+                    height: 42,
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => SigninPage() ),);
+
+                    },
+                    child: Text('Log In', style: TextStyle(fontSize: 20),)),
+              ),
             ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Material(
+                elevation: 5.0,
+                color: Color(0xFFFFBA52),
+                borderRadius: BorderRadius.circular(30.0),
+                child: MaterialButton(
+                    minWidth: 300.0,
+                    height: 42,
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => SignupPage() ),);
+
+                    },
+                    child: Text('Register', style: TextStyle(fontSize: 20),)),
+              ),
             ),
-          ],
+            SizedBox(
+              height: 30,
+            )
+          ]
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      )
     );
   }
 }
