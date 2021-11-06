@@ -14,10 +14,10 @@ Dart
     - Fill out your email address and confirm your password
 
 # Features
- Weight's tracker
- Time Tracker
- Water Tracker
- Recipe's Saver
+ + Weight's tracker
+ + Time Tracker
+ + Water Tracker
+ + Recipe's Saver
  
 # Authors
 Phuong Nguyen - [My App Website](https://eatimer.netlify.app/) - [My LinkedIn](https://www.linkedin.com/in/phuongpan/)
