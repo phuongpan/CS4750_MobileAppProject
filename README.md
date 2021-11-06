@@ -1,4 +1,4 @@
-# fasting_diary
+# eatimer
 
 A new Flutter project.
 

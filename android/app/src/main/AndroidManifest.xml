@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.fasting_diary">
+    package="com.phuongnguyen.eatimer.eatimer">
    <application
-        android:label="fasting_diary"
+        android:label="eatimer"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

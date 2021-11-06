@@ -1,4 +1,4 @@
-package com.example.fasting_diary
+package com.phuongnguyen.eatimer.eatimer
 
 import io.flutter.embedding.android.FlutterActivity
 

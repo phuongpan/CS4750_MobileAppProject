@@ -1,8 +1,14 @@
-import 'package:fasting_diary/sign_in_page.dart';
+
+import 'package:eatimer/Auth/sign_in_page.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cool_alert/cool_alert.dart';
+
+import 'Set_Up_Infor/Get_Current_Weight.dart';
+
+final FirebaseAuth _auth = FirebaseAuth.instance;
+
 class SignupPage extends StatefulWidget {
   const SignupPage({Key? key}) : super(key: key);
 
@@ -11,10 +17,11 @@ class SignupPage extends StatefulWidget {
 }
 
 class _SignupPageState extends State<SignupPage> {
-  var nameController = TextEditingController();
-  var emailController = TextEditingController();
-  var passwordController = TextEditingController();
-  var confirmedPassController = TextEditingController();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+  final confirmedPassController = TextEditingController();
+
   var success = false;
 
   @override
@@ -38,7 +45,7 @@ class _SignupPageState extends State<SignupPage> {
               Hero(
                 tag: 'logo',
                 child: Container(
-                  height: 160,
+                  height: 170,
                   child: Image(
                     image: AssetImage('pictures/SignIn.PNG'),
                     fit: BoxFit.cover,
@@ -59,27 +66,17 @@ class _SignupPageState extends State<SignupPage> {
                   Container(
                     margin: EdgeInsets.only(bottom:20, left:50, right:50),
                     child: TextField(
-                      controller: nameController,
-                      obscureText: false, // to hide the text when typing
-                      decoration: InputDecoration(
-                        // border: OutlineInputBorder(),
-                        labelText: 'Enter Your Name',
-                        filled: true,
-                        fillColor: Color(0xFFFFFCFC),
-                      ),
-                    ),
-                  ),
-                  Container(
-                    margin: EdgeInsets.only(bottom:20, left:50, right:50),
-                    child: TextField(
+                      keyboardType: TextInputType.emailAddress,
                       controller: emailController,
                       obscureText: false, // to hide the text when typing
                       decoration: InputDecoration(
-                        // border: OutlineInputBorder(),
+                        border: OutlineInputBorder(borderRadius: BorderRadius.circular(20)),
                         labelText: 'Enter Your Email',
+                        labelStyle: TextStyle(color: Colors.black38),
                         filled: true,
                         fillColor: Color(0xFFFFFCFC),
                       ),
+                      style: TextStyle(color: Colors.black),
                     ),
                   ),
                   Container(
@@ -88,11 +85,13 @@ class _SignupPageState extends State<SignupPage> {
                       controller: passwordController,
                       obscureText: true, // to hide the text when typing
                       decoration: InputDecoration(
-                        // border: OutlineInputBorder(),
+                        border: OutlineInputBorder(borderRadius: BorderRadius.circular(20)),
                         labelText: 'Enter Your Password',
+                        labelStyle: TextStyle(color: Colors.black38),
                         filled: true,
                         fillColor: Color(0xFFFFFCFC),
                       ),
+                      style: TextStyle(color: Colors.black),
                     ),
                   ),
                   Container(
@@ -101,11 +100,13 @@ class _SignupPageState extends State<SignupPage> {
                       controller: confirmedPassController,
                       obscureText: true, // to hide the text when typing
                       decoration: InputDecoration(
-                        // border: OutlineInputBorder(),
+                        border: OutlineInputBorder(borderRadius: BorderRadius.circular(20),),
                         labelText: 'Confirm Your Password',
+                        labelStyle: TextStyle(color: Colors.black38),
                         filled: true,
                         fillColor: Color(0xFFFFFCFC),
                       ),
+                      style: TextStyle(color: Colors.black),
                     ),
                   ),
 
@@ -119,53 +120,59 @@ class _SignupPageState extends State<SignupPage> {
                   width: 250,
                   child:
 
-                  ElevatedButton(
-                    style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all<Color>(Color(0xFFFFBA52)),
-                    ),
-
+                  Material(
+                    elevation: 5,
+                    color: Color(0xffFFBA52),
+                    borderRadius: BorderRadius.circular(30.0),
+                    child: MaterialButton(
+                        minWidth: 300,
+                        height: 42,
                     child: Text('Sign up', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),),
-                    onPressed: () {
-                      //1. Get the information typed
-                      print(nameController.text);
-                      print(emailController.text);
-                      print(passwordController.text);
-                      print(confirmedPassController.text);
-                      // 2. Send it to Firebase Auth
-                      FirebaseAuth.instance.createUserWithEmailAndPassword(
-                          email: emailController.text,
-                          password: passwordController.text).then((value){
-                              print('Successfully Signed Up');
-                              //https://pub.dev/packages/cool_alert/example
-                              CoolAlert.show(
-                                  context: context,
-                                  type: CoolAlertType.success,
-                                  text: 'Successfully Signed Up',
-                                  backgroundColor: Color(0xFFFFBA52),
-                                  confirmBtnColor: Color(0xFFFEE5B4),
-                                  confirmBtnText: 'Yay!',
-                                  confirmBtnTextStyle: TextStyle(color: Colors.black),
-                              onConfirmBtnTap: ()=> Navigator.pop(context));
-                          }).catchError((error) {
+                    onPressed: () async{
+
+                      final User? user = (await _auth.createUserWithEmailAndPassword(
+                        email: emailController.text,
+                        password: passwordController.text,
+                      )).user;
+
+                      if(user != null)
+                      {
+                        print('Successfully Signed Up');
+                        setState(() {
+                        });
+                        //https://pub.dev/packages/cool_alert/example
                         CoolAlert.show(
                             context: context,
-                            type: CoolAlertType.error,
-                            text: error.toString(),
+                            type: CoolAlertType.success,
+                            text: 'Successfully Signed Up',
                             backgroundColor: Color(0xFFFFBA52),
                             confirmBtnColor: Color(0xFFFEE5B4),
-                            confirmBtnTextStyle: TextStyle(color: Colors.black) ,
+                            confirmBtnText: 'Yay!',
+                            confirmBtnTextStyle: TextStyle(
+                                color: Colors.black),
+                            onConfirmBtnTap: () async => Navigator.push(context, MaterialPageRoute(builder: (context) => CurrentWeight()),));
+                      }
+                      else{
+                        CoolAlert.show(
+                          context: context,
+                          type: CoolAlertType.error,
+                          text: 'Registration failed',
+                          backgroundColor: Color(0xFFFFBA52),
+                          confirmBtnColor: Color(0xFFFEE5B4),
+                          confirmBtnTextStyle: TextStyle(color: Colors.black),
                         );
-                      });
+                      }
                     }
                   ),
                 ),
+              )
             ),
               Expanded(
                   flex:10,
                   child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children:[
-                        Text('Already have an account'),
+                        Text('Already have an account', style: TextStyle(color: Colors.black38),),
                         TextButton(
                           style: TextButton.styleFrom(
                             textStyle: const TextStyle(fontSize: 15),
@@ -195,4 +202,13 @@ class _SignupPageState extends State<SignupPage> {
       )
     );
   }
+
+  @override
+  void dispose() {
+    // Clean up the controller when the Widget is disposed
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
 }
+

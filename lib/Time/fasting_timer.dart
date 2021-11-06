@@ -83,15 +83,16 @@ class _Timer1State extends State<Timer1> {
       timer!.cancel();
       if(reset)
       {
-        resetTimer();
         CoolAlert.show(
           context: context,
           type: CoolAlertType.success,
-          text: "Yay! It's time to eat",
+          text: maxMinutes == 0 ? "Yay! You have been fasting for ${(maxHours - hours - 1).toString().padLeft(2,'0')}  : ${(60 - minutes).toString().padLeft(2,'0')} m":
+          "Yay! You have been fasting for ${(maxHours - hours).toString().padLeft(2,'0')} h: ${(60 - minutes+maxMinutes).toString().padLeft(2,'0')} m",
           backgroundColor: Color(0xFFFFBA52),
           confirmBtnColor: Color(0xFFFEE5B4),
           confirmBtnTextStyle: TextStyle(color: Colors.black) ,
         );
+        resetTimer();
       }
     });
   }

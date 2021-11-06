@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "358622170028",
-    "project_id": "eatimer-e85c5",
-    "storage_bucket": "eatimer-e85c5.appspot.com"
+    "project_number": "799402404215",
+    "project_id": "eatimer-mobile-app",
+    "storage_bucket": "eatimer-mobile-app.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:358622170028:android:903d61b38e441c4155c809",
+        "mobilesdk_app_id": "1:799402404215:android:f3c45e4af508db0b8dd972",
         "android_client_info": {
-          "package_name": "com.example.fasting_diary"
+          "package_name": "com.phuongnguyen.eatimer.eatimer"
         }
       },
       "oauth_client": [
         {
-          "client_id": "358622170028-0vg2r7lk3h54jpq0rtg96apddcihbqmi.apps.googleusercontent.com",
+          "client_id": "799402404215-b6k17hqviv5c754ntk5kq1aasd7fl3ga.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDugZNvE8T7qC-JI5YWtJKRC2JTToJ7P4A"
+          "current_key": "AIzaSyBrTvor2Pco_bT1QKsYPZQLyubfkuTDr1w"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "358622170028-0vg2r7lk3h54jpq0rtg96apddcihbqmi.apps.googleusercontent.com",
+              "client_id": "799402404215-b6k17hqviv5c754ntk5kq1aasd7fl3ga.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

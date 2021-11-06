@@ -1,15 +1,15 @@
-import 'package:fasting_diary/screens/HomeScreen.dart';
-import 'package:fasting_diary/screens/add_screen.dart';
+import 'package:eatimer/Notes/Recipe_Details.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-class UpdateNotes extends StatefulWidget {
-  UpdateNotes({Key? key, required this.name}) : super(key: key);
+
+class UpdateRecipe extends StatefulWidget {
+  UpdateRecipe({Key? key, required this.name}) : super(key: key);
   String name;
   @override
-  _UpdateNotesState createState() => _UpdateNotesState(name);
+  _UpdateRecipeState createState() => _UpdateRecipeState(name);
 }
 
-class _UpdateNotesState extends State<UpdateNotes> {
+class _UpdateRecipeState extends State<UpdateRecipe> {
   String titleController = '';
   String descriptionController = '' ;
   TextEditingController despController = TextEditingController();
@@ -17,7 +17,7 @@ class _UpdateNotesState extends State<UpdateNotes> {
   String name;
   DatabaseReference ref = FirebaseDatabase.instance.reference();
 
-  _UpdateNotesState(this.name){
+  _UpdateRecipeState(this.name){
     FirebaseDatabase.instance.reference().child('List-recipe/$name').once().then((datasnapshot) {
       print("Successfully loaded the data");
       print(datasnapshot);
@@ -54,7 +54,7 @@ class _UpdateNotesState extends State<UpdateNotes> {
 
                       FirebaseDatabase.instance.reference().child('List-recipe').child(name).remove();
                       setState(() {});
-                      await Navigator.push(context, MaterialPageRoute(builder: (context) => HomeScreen()),);
+                      await Navigator.push(context, MaterialPageRoute(builder: (context) => RecipeDetails()),);
                       }, child: const Text('Delete'),)
                   ],
                 )),

@@ -1,5 +1,5 @@
 import 'package:cool_alert/cool_alert.dart';
-import 'package:fasting_diary/Time/fasting_timer.dart';
+import 'package:eatimer/Time/fasting_timer.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:numberpicker/numberpicker.dart';

@@ -1,17 +1,15 @@
-import 'package:fasting_diary/screens/HomeScreen.dart';
+import 'package:eatimer/Notes/Recipe_Details.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-import "package:provider/provider.dart";
-import 'package:fasting_diary/Notes/NoteOperation.dart';
 
-class AddScreen extends StatefulWidget {
-  const AddScreen({key}) : super(key: key);
+class AddRecipe extends StatefulWidget {
+  const AddRecipe({key}) : super(key: key);
 
   @override
-  _AddScreenState createState() => _AddScreenState();
+  _AddRecipeState createState() => _AddRecipeState();
 }
 
-class _AddScreenState extends State<AddScreen> {
+class _AddRecipeState extends State<AddRecipe> {
   var titleController = TextEditingController();
   var descriptionController = TextEditingController();
   @override
@@ -59,8 +57,7 @@ class _AddScreenState extends State<AddScreen> {
             FlatButton(
                 onPressed: (){
                   var timestamp = new DateTime.now().millisecondsSinceEpoch;
-                  Provider.of<NoteOperation>(context, listen: false).addNewNode(titleController.toString(), "");
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => HomeScreen()),);
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => RecipeDetails()),);
                   FirebaseDatabase.instance.reference().child('List-recipe/recipe'+ timestamp.toString()).set({
                     "title": titleController.text,
                     "description": descriptionController.text

@@ -1,21 +1,22 @@
-import 'package:fasting_diary/screens/UpdateNotes.dart';
+import 'package:eatimer/Notes/Update_Recipe.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-import 'package:fasting_diary/screens/add_screen.dart';
-import 'package:fasting_diary/home_page.dart';
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({key}) : super(key: key);
+import 'package:eatimer/Notes/Add_New_Recipe.dart';
+import 'package:eatimer/HomePage.dart';
+
+class RecipeDetails extends StatefulWidget {
+  const RecipeDetails({key}) : super(key: key);
 
   @override
-  _HomeScreenState createState() => _HomeScreenState();
+  _RecipeDetailsState createState() => _RecipeDetailsState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _RecipeDetailsState extends State<RecipeDetails> {
 
   var RecipeList = [];
   var KeyList = [];
 
-  _HomeScreenState(){
+  _RecipeDetailsState(){
     refreshList();
     FirebaseDatabase.instance.reference().child('List-recipe').onChildChanged.listen((event) {
       print("Data changed");
@@ -58,7 +59,7 @@ class _HomeScreenState extends State<HomeScreen> {
         onPressed: () async{
           await Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => AddScreen()),);
+            MaterialPageRoute(builder: (context) => AddRecipe()),);
           refreshList();
         },
         backgroundColor: Color(0xFFFFBA52),
@@ -75,7 +76,7 @@ class _HomeScreenState extends State<HomeScreen> {
         backgroundColor: Colors.white,
         leading: GestureDetector(
           onTap: () {
-            Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage(name: 'Natalia')),);
+            Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage()),);
             },
           child: Icon(
             Icons.chevron_left, color: Colors.black, // add custom icons also
@@ -91,7 +92,7 @@ class _HomeScreenState extends State<HomeScreen> {
             print(KeyList[index]);
             String name = KeyList[index].toString();
             print(name);
-            await Navigator.push(context,MaterialPageRoute(builder: (context) => UpdateNotes(name: name)),);
+            await Navigator.push(context,MaterialPageRoute(builder: (context) => UpdateRecipe(name: name)),);
             refreshList();
           },
             title: Container(
@@ -102,21 +103,23 @@ class _HomeScreenState extends State<HomeScreen> {
                 color: Color(0xFFFFBA52),
                 borderRadius: BorderRadius.circular(15),
               ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start ,
-                children: [
-                  Text("${RecipeList[index]['title']}",
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start ,
+                  children: [
+                    Text("${RecipeList[index]['title']}",
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                  ),
-                  Text("${RecipeList[index]['description']}",
-                    style: TextStyle(
-                      fontSize: 17,
+                    Text("${RecipeList[index]['description']}",
+                      style: TextStyle(
+                        fontSize: 17,
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           );

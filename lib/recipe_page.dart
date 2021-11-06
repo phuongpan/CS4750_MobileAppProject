@@ -1,4 +1,3 @@
-import 'package:fasting_diary/recipe_details.dart';
 import 'package:flutter/material.dart';
 class RecipePage extends StatefulWidget {
   const RecipePage({Key? key}) : super(key: key);
@@ -78,9 +77,9 @@ class _RecipePageState extends State<RecipePage> {
                       return ListTile(
                         onTap: ()
                           {
-                             Navigator.push(
-                               context,
-                               MaterialPageRoute(builder: (context) => RecipeDetails(recipe[index])),);
+                             // Navigator.push(
+                             //   context,
+                             //   MaterialPageRoute(builder: (context) => RecipeDetails(recipe[index])),);
                           },
                         title: Container(
                           margin: EdgeInsets.only(top: 10),
@@ -103,10 +102,10 @@ class _RecipePageState extends State<RecipePage> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: (){
-          String new_recipe= 'New Recipe';
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => RecipeDetails(new_recipe)),);
+          // String new_recipe= 'New Recipe';
+          // Navigator.push(
+          //   context,
+          //   MaterialPageRoute(builder: (context) => RecipeDetails(new_recipe)),);
         },
         backgroundColor: Color(0xFFFEE5B4),
         child: Icon(Icons.add, color: Colors.black,),
