@@ -23,7 +23,7 @@ Dart
 https://user-images.githubusercontent.com/72096491/140627724-cb792413-1156-4aff-b4b2-3f6aeb90ecd3.mp4
 
 
-# Authors
+# Author
 Phuong Nguyen - [My App Website](https://eatimer.netlify.app/) - [My LinkedIn](https://www.linkedin.com/in/phuongpan/)
 
 
