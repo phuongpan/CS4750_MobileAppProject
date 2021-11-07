@@ -19,9 +19,13 @@ Dart
  + Water Tracker
  + Recipe's Saver
  
+# Demo
+https://user-images.githubusercontent.com/72096491/140627724-cb792413-1156-4aff-b4b2-3f6aeb90ecd3.mp4
+
+
 # Authors
 Phuong Nguyen - [My App Website](https://eatimer.netlify.app/) - [My LinkedIn](https://www.linkedin.com/in/phuongpan/)
-https://streamable.com/plo0i6
+
 
 # Acknowledgments
 This is a project for my CS4750 class at Cal Poly Pomona Fall 2021
