@@ -3,9 +3,9 @@
 A mobile application (android) to helps people keeping track their weight, time to eat and water.
 
 # Built with
-Flutter
-Firebase 
-Dart
++ Flutter
++ Firebase 
++ Dart
 
 # How to use
 + This app is required an account to log in
